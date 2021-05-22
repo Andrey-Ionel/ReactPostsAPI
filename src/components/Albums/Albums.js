@@ -1,11 +1,11 @@
 import { Pagination } from "../Pagination/Pagination"
 import { usePostsContext } from "../../PostsContext";
-import { AlbumsCard } from "../Albums/AlbumsCard/AlbumsCard";
-import { LMButton } from "../LMButton/LMButton"
-import { Navigation } from "../Navigation/Navigation"
+import AlbumsCard from "../Albums/AlbumsCard/AlbumsCard";
+import { LMButton } from "../LMButton/LMButton";
+import { Navigation } from "../Navigation/Navigation";
 
 export function Albums() {
-  const { currentPosts } = usePostsContext();
+  const { currentPosts, toggleFavorite } = usePostsContext();
   return (
     <main className="uk-main">
       <Navigation />
@@ -15,9 +15,10 @@ export function Albums() {
             {
               currentPosts?.map((post) => (
                 <AlbumsCard key={post.id}
-                  title={post.title}
                   id={post.id}
                   body={post.body}
+                  toggleFavorite={toggleFavorite}
+                  favorite={post.favorite}
                 />
               ))
             }

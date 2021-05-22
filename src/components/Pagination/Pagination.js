@@ -2,29 +2,43 @@ import { usePostsContext } from "../../PostsContext";
 
 export function Pagination() {
   const { totalPosts, paginate, currentPage } = usePostsContext();
-  const pageNumbers = []
+  const pageNumbers = [];
   for (let i = 1; i <= totalPosts; i++) {
     pageNumbers.push(i);
+  }
+
+  const nextPage = () => {
+    if ((parseInt(currentPage) + 1) <= totalPosts) {
+      return (parseInt(currentPage) + 1);
+    }
+    return currentPage;
+  }
+
+  const previousPage = () => {
+    if ((parseInt(currentPage) - 1) >= 1) {
+      return (parseInt(currentPage) - 1);
+    }
+    return currentPage;
   }
   return (
     <ul
       className="uk-pagination uk-flex-center uk-flex-middle"
       uk-margin="true"
     >
-      <li>
-        <a href="#">
+      <li onClick={() => paginate(previousPage)}>
+        <a href="#" onClick={(e) => e.preventDefault()}>
           <span uk-pagination-previous="true"></span>
         </a>
       </li>
       {pageNumbers.map((number) => (
         <li key={number} onClick={() => paginate(number)} className={(number === currentPage) ? "uk-active" : ""}>
-          {(number === currentPage) ? <span >{number}</span> : <a href="#">{number}</a>}
+          {(number === currentPage) ? <span >{number}</span> : <a href="#" onClick={(e) => e.preventDefault()}>{number}</a>}
         </li>
       ))
       }
       {/* <li className="uk-disabled"><span>...</span></li> */}
-      <li>
-        <a href="#">
+      <li onClick={() => paginate(nextPage)} >
+        <a href="#" onClick={(e) => e.preventDefault()}>
           <span uk-pagination-next="true"></span>
         </a>
       </li>

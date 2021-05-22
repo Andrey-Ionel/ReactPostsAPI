@@ -1,4 +1,12 @@
-export function PostscardPostsLists({ body, title }) {
+import PropTypes from "prop-types";
+import "./PostscardPostsLists.css";
+import { NavLink } from "react-router-dom";
+
+function PostscardPostsLists({ body, title, id, toggleFavorite, favorite }) {
+  const onClickFavorite = (e) => {
+    e.preventDefault();
+    toggleFavorite(id);
+  }
   return (
     <div>
       <div
@@ -12,17 +20,27 @@ export function PostscardPostsLists({ body, title }) {
         <div>
           <div className="uk-card-body">
             <h3 className="uk-card-title uk-margin-remove-bottom uk-flex uk-flex-middle uk-flex-between">
-              {title} <a href="/" className="uk-icon-link" uk-icon="heart"></a>
+              {title} <a href="/" className={favorite === true ? "uk-icon-link favorite-active" : "uk-icon-link"} uk-icon="heart" onClick={onClickFavorite}></a>
             </h3>
             <p>
               {body}
             </p>
-            <a href="Post" className="uk-button uk-button-text">
+            <NavLink to={{ pathname: "/Post/" + id, postTitle: title, postBody: body }} className="uk-button uk-button-text" >
               Read more
-            </a>
+            </NavLink>
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
+
+PostscardPostsLists.propTypes = {
+  id: PropTypes.number,
+  title: PropTypes.string,
+  body: PropTypes.string,
+  favorite: PropTypes.bool,
+  toggleFavorite: PropTypes.func
+}
+
+export default PostscardPostsLists;

@@ -20,7 +20,7 @@ export default function App() {
           <Route exact path="/Postsgrid" component={Postsgrid} />
           <Route exact path="/Albums" component={Albums} />
           <Route exact path="/Posts" component={Posts} />
-          <Route exact path="/Post" component={Post} />
+          <Route exact path="/Post/:id" component={Post} />
         </Switch>
       </BrowserRouter>
     </PostsProvider>

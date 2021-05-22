@@ -1,12 +1,12 @@
-import { Pagination } from "../Pagination/Pagination"
+import { Pagination } from "../Pagination/Pagination";
 import { usePostsContext } from "../../PostsContext";
-import { PostscardPostsgrid } from "../Postsgrid/PostscardPostsgrid/PostscardPostsgrid";
-import { Filters } from "../Filters/Filters"
-import { LMButton } from "../LMButton/LMButton"
-import { Navigation } from "../Navigation/Navigation"
+import PostscardPostsgrid from "../Postsgrid/PostscardPostsgrid/PostscardPostsgrid";
+import { Filters } from "../Filters/Filters";
+import { LMButton } from "../LMButton/LMButton";
+import { Navigation } from "../Navigation/Navigation";
 
 export function Postsgrid() {
-  const { currentPosts } = usePostsContext();
+  const { currentPosts, toggleFavorite } = usePostsContext();
   return (
     <main className="uk-main">
       <Navigation />
@@ -20,6 +20,8 @@ export function Postsgrid() {
                   title={post.title}
                   id={post.id}
                   body={post.body}
+                  toggleFavorite={toggleFavorite}
+                  favorite={post.favorite}
                 />
               ))
             }

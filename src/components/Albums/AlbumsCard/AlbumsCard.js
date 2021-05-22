@@ -1,6 +1,13 @@
-export function AlbumsCard({ body }) {
-  return (
+import PropTypes from "prop-types";
+import "./AlbumsCard.css";
 
+function AlbumsCard({ body, id, toggleFavorite, favorite }) {
+  const onClickFavorite = (e) => {
+    e.preventDefault();
+    toggleFavorite(id);
+  }
+
+  return (
     <div>
       <div className="uk-card uk-card-default uk-margin-medium-bottom uk-light">
         <img
@@ -17,9 +24,18 @@ export function AlbumsCard({ body }) {
         </div>
 
         <div className="uk-position-top-right uk-overlay">
-          <a href="" uk-icon="icon: heart; ratio: 2"></a>
+          <a href="" uk-icon="icon: heart; ratio: 2" onClick={onClickFavorite} className={favorite === true ? "uk-icon favorite-active" : "uk-icon"}></a>
         </div>
       </div>
     </div>
   )
 }
+
+AlbumsCard.propTypes = {
+  id: PropTypes.number,
+  body: PropTypes.string,
+  favorite: PropTypes.bool,
+  toggleFavorite: PropTypes.func
+}
+
+export default AlbumsCard;

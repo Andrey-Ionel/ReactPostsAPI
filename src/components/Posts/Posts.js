@@ -1,7 +1,7 @@
-import { Pagination } from "../Pagination/Pagination"
+import { Pagination } from "../Pagination/Pagination";
 import { usePostsContext } from "../../PostsContext";
-import { PostscardPosts } from "../Posts/PostscardPosts/PostscardPosts";
-import { Filters } from "../Filters/Filters"
+import PostscardPosts from "../Posts/PostscardPosts/PostscardPosts";
+import { Filters } from "../Filters/Filters";
 
 export function Posts() {
   const { currentPosts } = usePostsContext();

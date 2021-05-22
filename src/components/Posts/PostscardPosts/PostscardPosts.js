@@ -1,9 +1,11 @@
-export function PostscardPosts({ body, title }) {
+import PropTypes from "prop-types";
+import { NavLink } from "react-router-dom";
+
+export function PostscardPosts({ title, body, id }) {
   return (
 
     <div>
-      <a
-        href="#"
+      <NavLink to={{ pathname: "/Post/" + id, postTitle: title, postBody: body }}
         className="uk-card uk-card-default uk-margin-medium-bottom uk-child-width-1-2@s uk-grid-collapse uk-margin"
         uk-grid="true"
       >
@@ -23,7 +25,14 @@ export function PostscardPosts({ body, title }) {
             </p>
           </div>
         </div>
-      </a>
+      </NavLink>
     </div>
   )
 }
+
+PostscardPosts.propTypes = {
+  body: PropTypes.string,
+  title: PropTypes.string,
+}
+
+export default PostscardPosts;

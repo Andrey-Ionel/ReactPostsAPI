@@ -1,5 +1,5 @@
-import { useState, createContext, useEffect, useContext } from 'react';
-import { getPostsRequest } from "./api";
+import { useState, createContext, useEffect, useContext } from "react";
+import { getPostsRequest, patchFavoritePostsRequest } from "./api";
 import fetcher from "./utils/fetcher";
 
 const PostsContext = createContext(null);
@@ -32,6 +32,12 @@ const PostsProvider = ({ children }) => {
     }
   }, []);
 
+  useEffect((favorite) => {
+    if (favorite !== favorite) {
+      patchFavoritePostsRequest(id);
+    }
+  }, []);
+
   const getSearchPostsRequest = async (value) => {
     return await fetcher(`/posts?title_like=${value}`)
       .then((newPosts) => setPosts(newPosts));
@@ -51,7 +57,25 @@ const PostsProvider = ({ children }) => {
     setPostsQuantityPage(addPosts);
   }
 
+  const toggleFavorite = (id) => {
+    const favoritePost = posts?.map((post) => {
+      if (post.id === id && post.favorite === undefined) {
+        post.favorite = true;
+        patchFavoritePostsRequest(id, post.favorite)
+      } else if (post.id === id && post.favorite === false) {
+        post.favorite = true;
+        patchFavoritePostsRequest(id, post.favorite)
+      } else if (post.id === id && post.favorite === true) {
+        post.favorite = false;
+        patchFavoritePostsRequest(id, post.favorite)
+      }
+      return post;
+    })
+    setPosts(favoritePost);
+  }
+
   const value = {
+    posts,
     currentPosts,
     postsQuantityPage,
     totalPosts,
@@ -62,6 +86,7 @@ const PostsProvider = ({ children }) => {
     setQuantityPosts,
     setPosts,
     addMorePosts,
+    toggleFavorite
   }
 
   return (
@@ -73,4 +98,4 @@ const PostsProvider = ({ children }) => {
 };
 
 const usePostsContext = () => useContext(PostsContext);
-export { PostsContext, PostsProvider, usePostsContext }
+export { PostsContext, PostsProvider, usePostsContext };
