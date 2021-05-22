@@ -1,7 +1,7 @@
 import "./Post.css";
 import { Navigation } from "../Navigation/Navigation";
 import { Redirect } from "react-router-dom";
-import { Comments } from "./Comments/Comments";
+import Comments from "./Comments/Comments";
 import { useState, useEffect } from "react";
 import { createCommentRequest, getCommentsRequest } from "../../api";
 

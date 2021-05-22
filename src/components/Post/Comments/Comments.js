@@ -1,4 +1,6 @@
-export function Comments({ author, email, commentTitle }) {
+import PropTypes from "prop-types";
+
+function Comments({ author, email, commentTitle }) {
   return (
     <div className="uk-comments">
       <article className="uk-comment">
@@ -25,3 +27,11 @@ export function Comments({ author, email, commentTitle }) {
     </div>
   )
 }
+
+Comments.propTypes = {
+  author: PropTypes.string,
+  email: PropTypes.string,
+  commentTitle: PropTypes.string,
+}
+
+export default Comments;
