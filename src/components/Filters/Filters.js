@@ -1,21 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePostsContext } from "../../PostsContext";
 import { NavLink } from "react-router-dom";
+import { useDebounce } from "../Hooks/UseDebounce";
+import React from "react";
 
-export function Filters() {
-  const { getSortPostsRequest, setQuantityPosts, getSearchPostsRequest } = usePostsContext();
+function Filters() {
+  const { getSortPostsRequest, setQuantityPosts,
+    getSearchPostsRequest, setIsSearching, isSearching,
+    postsQuantityPage, orderValue, setOrderValue } = usePostsContext();
   const [name, setName] = useState("");
-  const [orderValue, setOrderValue] = useState("asc");
+  const [, setearchResults] = useState([]);
 
-  const onInputValueChange = (e) => {
-    e.preventDefault();
-    if (e.target.value.trim()) {
-      getSearchPostsRequest(e.target.value);
-    } else if (e.target.value === "") {
+  const debouncedValue = useDebounce(name, 500);
+
+  useEffect(() => {
+    if (debouncedValue) {
+      setIsSearching(true);
+      getSearchPostsRequest(debouncedValue)
+        .then((results) => {
+          setIsSearching(false);
+          setearchResults(results)
+        })
+    } else if (isSearching === true) {
+      setearchResults([]);
       getSortPostsRequest(orderValue);
+      setIsSearching(false);
     }
-    setName(e.target.value);
-  }
+  },
+    [debouncedValue]
+  )
 
   const onPostsOrderChange = (e) => {
     getSortPostsRequest(e.target.value);
@@ -23,27 +36,39 @@ export function Filters() {
   }
 
   const isActive = location.pathname;
+
+  const onKeyPressDefault = (e) => {
+    if (e.charCode === 13) {
+      e.preventDefault();
+    }
+  }
   return (
     <div className="uk-margin-medium-bottom uk-flex">
-      <form className="uk-search uk-search-default uk-width-medium uk-margin-remove uk-margin-right">
+      <form
+        className="uk-search uk-search-default uk-width-medium uk-margin-remove uk-margin-right">
         <span uk-search-icon="true"></span>
-        {name.trim() && <span
+        {isSearching && <span
           className="uk-search-icon uk-search-icon-flip"
           uk-spinner="ratio: 0.6"
         ></span>}
         <input
           value={name}
-          onChange={onInputValueChange}
+          onKeyPress={onKeyPressDefault}
+          onChange={(e) => { setIsSearching(true); setName(e.target.value); }}
           className="uk-search-input"
           type="search"
           placeholder="Search..."
         />
       </form>
-      <select className="uk-select uk-width-small uk-margin-auto-left" onChange={onPostsOrderChange}>
+      <select value={orderValue}
+        className="uk-select uk-width-small uk-margin-auto-left"
+        onChange={onPostsOrderChange}>
         <option value="asc">ASC</option>
         <option value="desc">DESC</option>
       </select>
-      <select className="uk-select uk-width-small uk-margin-left" onChange={(e) => setQuantityPosts(e.target.value)}>
+      <select value={postsQuantityPage}
+        className="uk-select uk-width-small uk-margin-left"
+        onChange={(e) => setQuantityPosts(e.target.value)}>
         <option value="6">6</option>
         <option value="12">12</option>
         <option value="24">24</option>
@@ -54,8 +79,8 @@ export function Filters() {
           className="uk-button uk-button-default" >
           <span uk-icon="icon:  grid"></span>
         </NavLink>
-        <NavLink to="/Posts"
-          activeClassName={isActive === "/Posts" ? "uk-active" : ""}
+        <NavLink to="/Postsgrid"
+          activeClassName={isActive === "/Postsgrid" ? "uk-active" : ""}
           className="uk-button uk-button-default" >
           <span uk-icon="icon:  list"></span>
         </NavLink>
@@ -63,3 +88,5 @@ export function Filters() {
     </div >
   )
 }
+
+export default React.memo(Filters);

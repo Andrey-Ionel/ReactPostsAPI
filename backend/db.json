@@ -5,21 +5,23 @@
       "id": 1,
       "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
       "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
-      "favorite": false
+      "favoritePost": false,
+      "favoriteAlbum": false
     },
     {
       "userId": 1,
       "id": 2,
       "title": "qui est esse",
       "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla",
-      "favorite": false
+      "favoritePost": false,
+      "favoriteAlbum": false
     },
     {
       "userId": 1,
       "id": 3,
       "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
       "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut",
-      "favorite": false
+      "favoriteAlbum": false
     },
     {
       "userId": 1,
@@ -37,7 +39,8 @@
       "userId": 1,
       "id": 6,
       "title": "dolorem eum magni eos aperiam quia",
-      "body": "ut aspernatur corporis harum nihil quis provident sequi\nmollitia nobis aliquid molestiae\nperspiciatis et ea nemo ab reprehenderit accusantium quas\nvoluptate dolores velit et doloremque molestiae"
+      "body": "ut aspernatur corporis harum nihil quis provident sequi\nmollitia nobis aliquid molestiae\nperspiciatis et ea nemo ab reprehenderit accusantium quas\nvoluptate dolores velit et doloremque molestiae",
+      "favoriteAlbum": false
     },
     {
       "userId": 1,
@@ -73,7 +76,8 @@
       "userId": 2,
       "id": 12,
       "title": "in quibusdam tempore odit est dolorem",
-      "body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio"
+      "body": "itaque id aut magnam\npraesentium quia et ea odit et ea voluptas et\nsapiente quia nihil amet occaecati quia id voluptatem\nincidunt ea est distinctio odio",
+      "favoriteAlbum": false
     },
     {
       "userId": 2,
@@ -601,15 +605,24 @@
       "userId": 10,
       "id": 100,
       "title": "at nam consequatur ea labore ea harum",
-      "body": "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut"
+      "body": "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut",
+      "favoritePost": false
     }
   ],
   "comments": [
     {
+      "path": "/Post/1",
       "id": 1621682670500,
       "author": "Andrey",
       "email": "a-ionel@ukr.net",
       "commentTitle": "Привет!"
+    },
+    {
+      "path": "/Post/2",
+      "id": 1622143670577,
+      "author": "andrey",
+      "email": "@hello",
+      "commentTitle": "Hello!"
     }
   ]
 }

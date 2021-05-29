@@ -1,4 +1,4 @@
-import fetcher from "../utils/fetcher"
+import fetcher from "../utils/fetcher";
 
 const getPostsRequest = async () => {
   return await fetcher("/posts");
@@ -9,11 +9,20 @@ const getCommentsRequest = async () => {
 }
 
 
-const patchFavoritePostsRequest = async (id, favorite) => {
+const patchFavoritePostsRequest = async (id, favoritePost) => {
   return await fetcher(`/posts/${id}`, {
     method: "PATCH",
     body: JSON.stringify({
-      favorite,
+      favoritePost,
+    }),
+  });
+};
+
+const patchFavoriteAlbumsRequest = async (id, favoriteAlbum) => {
+  return await fetcher(`/posts/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      favoriteAlbum,
     }),
   });
 };
@@ -25,5 +34,5 @@ const createCommentRequest = async (body) => {
   });
 };
 
-export { getPostsRequest, patchFavoritePostsRequest, createCommentRequest, getCommentsRequest };
+export { getPostsRequest, patchFavoritePostsRequest, patchFavoriteAlbumsRequest, createCommentRequest, getCommentsRequest };
 

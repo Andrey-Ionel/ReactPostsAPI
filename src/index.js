@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-
+import 'antd/dist/antd.css';
 import ReactDOM from "react-dom";
 import Uikit from "uikit";
 import Icons from "uikit/dist/js/uikit-icons";

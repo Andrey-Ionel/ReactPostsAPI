@@ -1,9 +1,12 @@
 import "./Post.css";
-import { Navigation } from "../Navigation/Navigation";
+import NavigationPosts from "../Navigation/NavigationPosts";
 import { Redirect } from "react-router-dom";
-import Comments from "./Comments/Comments";
+import Comments from "../Comments/Comments";
 import { useState, useEffect } from "react";
 import { createCommentRequest, getCommentsRequest } from "../../api";
+import { LeftCircleTwoTone } from '@ant-design/icons';
+import { Button } from 'antd';
+
 
 export function Post(props) {
   const [comments, setComments] = useState([]);
@@ -19,8 +22,8 @@ export function Post(props) {
   const onAddComment = (e) => (setCommentTitle(e.target.value));
 
   const onClickDataSend = (e) => {
-    e.preventDefault()
     addNewComment({
+      path: location.pathname,
       id: Date.now(),
       author: author,
       email: email,
@@ -35,9 +38,12 @@ export function Post(props) {
     getCommentsRequest().then((newComments) => setComments(newComments));
   }, []);
 
-  useEffect(() => {
+  useEffect((comment) => {
     if (comments.comment !== comments.comment) {
       createCommentRequest(comment);
+    }
+    return () => {
+      setComments([])
     }
   }, []);
 
@@ -53,33 +59,49 @@ export function Post(props) {
       e.preventDefault();
     }
   }
+
   return (
     <main className="uk-main">
-      <Navigation />
+      <NavigationPosts />
+      <div className="two-tone">
+        <Button type="primary"
+          onClick={() => props.history.goBack()}>
+          <LeftCircleTwoTone className="antd-back-icon" />
+          BACK...
+        </Button>
+      </div>
       <div className="uk-section">
         <div className="uk-container">
           <h1 className="uk-heading-bullet uk-margin-medium-bottom">
-            <span>{props.location.postTitle === undefined ? <Redirect to="/" /> : props.location.postTitle}
+            <span>{props.location.postTitle === undefined
+              ? <Redirect to="/" />
+              : props.location.postTitle}
             </span>
             <a className="uk-text-small" href="#"> Author
             </a>
           </h1>
           <div className="uk-article uk-dropcap uk-margin-large-bottom">
             <p>
-              {props.location.postBody === undefined ? <Redirect to="/" /> : props.location.postBody}.
+              {props.location.postBody === undefined
+                ? <Redirect to="/" />
+                : props.location.postBody}.
             </p>
           </div>
           <hr />
           <h3 className="uk-margin-remove-top">Comments:</h3>
-          {comments?.map((comment) => (
-            <Comments
-              key={comment.id}
-              id={comment.id}
-              author={comment.author}
-              email={comment.email}
-              commentTitle={comment.commentTitle}
-            />
-          ))}
+          {
+            comments?.map((comment) => (
+              comment.path === props.location.pathname ?
+                <Comments
+                  key={comment.id}
+                  id={comment.id}
+                  author={comment.author}
+                  email={comment.email}
+                  commentTitle={comment.commentTitle}
+                />
+                : null
+            ))
+          }
           <hr />
           <form action="#" className="uk-comment-form uk-margin-medium-top">
             <fieldset className="uk-fieldset">
