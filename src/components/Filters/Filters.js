@@ -22,7 +22,7 @@ function Filters() {
           setSearchResults(results)
         })
     } else if (isSearching === true) {
-      setearchResults([]);
+      setSearchResults([]);
       getSortPostsRequest(orderValue);
       setIsSearching(false);
     }

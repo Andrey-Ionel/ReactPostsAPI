@@ -12,6 +12,7 @@ const PostsProvider = ({ children }) => {
   const [orderValue, setOrderValue] = useState("asc");
   const [isSearching, setIsSearching] = useState(false);
   const [errorFetch, setErrorFetch] = useState(null);
+  const [pageView, setPageView] = useState()
 
   const indexOfLastPost = currentPage * postsQuantityPage;
   const indexOfFirstPost = indexOfLastPost - postsQuantityPage;
