@@ -5,6 +5,7 @@ function FavoritePosts({ title, id, toggleFavoritePosts }) {
   return (
     <tbody>
       <tr>
+        <th>Post</th>
         <td>{title}</td>
         <td className="uk-text-right">
           <button

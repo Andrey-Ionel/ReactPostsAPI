@@ -21,7 +21,7 @@ export function Pagination() {
     return currentPage;
   }
   return (
-    <ul
+    totalPosts > 0 && <ul
       className="uk-pagination uk-flex-center uk-flex-middle"
       uk-margin="true"
     >

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { usePostsContext } from "../../PostsContext";
 import { NavLink } from "react-router-dom";
-import { useDebounce } from "../Hooks/UseDebounce";
+import { useDebounce } from "../../Hooks/UseDebounce";
 import React from "react";
 
 function Filters() {
@@ -9,7 +9,7 @@ function Filters() {
     getSearchPostsRequest, setIsSearching, isSearching,
     postsQuantityPage, orderValue, setOrderValue } = usePostsContext();
   const [name, setName] = useState("");
-  const [, setearchResults] = useState([]);
+  const [, setSearchResults] = useState([]);
 
   const debouncedValue = useDebounce(name, 500);
 
@@ -19,7 +19,7 @@ function Filters() {
       getSearchPostsRequest(debouncedValue)
         .then((results) => {
           setIsSearching(false);
-          setearchResults(results)
+          setSearchResults(results)
         })
     } else if (isSearching === true) {
       setearchResults([]);

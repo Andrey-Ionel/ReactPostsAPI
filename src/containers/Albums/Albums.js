@@ -2,7 +2,7 @@ import { Pagination } from "../../components/Pagination/Pagination";
 import { usePostsContext } from "../../PostsContext";
 import AlbumsCard from "../../components/AlbumsCard/AlbumsCard";
 import { LMButton } from "../../components/LMButton/LMButton";
-import NavigationAlbums from "../../components/Navigation/NavigationAlbums";
+import Navigation from "../../components/Navigation/Navigation";
 import { Result } from 'antd';
 import { FrownTwoTone } from '@ant-design/icons';
 
@@ -10,7 +10,7 @@ export function Albums() {
   const { currentPageCards, toggleFavoriteAlbums } = usePostsContext();
   return (
     <main className="uk-main">
-      <NavigationAlbums />
+      <Navigation />
       <div className="uk-section">
         <div className="uk-container">
           <div className="uk-grid uk-child-width-1-2@s uk-child-width-1-3@m">

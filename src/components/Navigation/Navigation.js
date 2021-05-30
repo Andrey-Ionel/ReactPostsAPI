@@ -1,9 +1,16 @@
+import FavoritePosts from "../Favorite/FavoritePosts";
 import FavoriteAlbums from "../Favorite/FavoriteAlbums";
 import { usePostsContext } from "../../PostsContext";
 import React from "react";
 
-function NavigationAlbums() {
-  const { posts, toggleFavoriteAlbums } = usePostsContext();
+function Navigation() {
+  const { posts, toggleFavoritePosts, toggleFavoriteAlbums } = usePostsContext();
+  const favoritePosts = posts.filter((post) => {
+    if (post.favoritePost === true) {
+      return post.favoritePost;
+    }
+  })
+
   const favoriteAlbums = posts.filter((album) => {
     if (album.favoriteAlbum === true) {
       return album.favoriteAlbum;
@@ -28,7 +35,7 @@ function NavigationAlbums() {
       <div className="uk-navbar-right">
         <div className="uk-navbar-item">
           <button
-            className={favoriteAlbums.length
+            className={favoritePosts.length || favoriteAlbums.length
               ? "uk-button favorite-active" : "uk-button"}
             type="button"
             uk-icon="icon: heart; ratio: 2"
@@ -42,19 +49,27 @@ function NavigationAlbums() {
                 <table className="uk-table uk-table-divider uk-table-justify">
                   <thead>
                     <tr>
+                      <th>Favorite</th>
                       <th>Title</th>
                       <th className="uk-text-right">Delete</th>
                     </tr>
                   </thead>
-                  {
-                    favoriteAlbums.map((album) => (
-                      <FavoriteAlbums
-                        key={album.id}
-                        title={album.title}
-                        id={album.id}
-                        toggleFavoriteAlbums={toggleFavoriteAlbums}
-                      />
-                    ))
+                  {favoritePosts?.map((post) => (
+                    <FavoritePosts
+                      key={post.id}
+                      title={post.title}
+                      id={post.id}
+                      toggleFavoritePosts={toggleFavoritePosts}
+                    />
+                  ))}
+                  {favoriteAlbums?.map((album) => (
+                    <FavoriteAlbums
+                      key={album.id}
+                      title={album.title}
+                      id={album.id}
+                      toggleFavoriteAlbums={toggleFavoriteAlbums}
+                    />
+                  ))
                   }
                 </table>
               </div>
@@ -66,4 +81,4 @@ function NavigationAlbums() {
   )
 }
 
-export default React.memo(NavigationAlbums);
+export default React.memo(Navigation);

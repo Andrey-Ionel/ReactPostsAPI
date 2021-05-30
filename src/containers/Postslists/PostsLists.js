@@ -3,7 +3,7 @@ import PostscardPostsLists from "../../components/PostscardPostsLists/PostscardP
 import { Pagination } from "../../components/Pagination/Pagination";
 import Filters from "../../components/Filters/Filters";
 import { LMButton } from "../../components/LMButton/LMButton";
-import NavigationPosts from "../../components/Navigation/NavigationPosts";
+import Navigation from "../../components/Navigation/Navigation";
 import { Result } from 'antd';
 import { FrownTwoTone } from '@ant-design/icons';
 
@@ -11,7 +11,7 @@ export function Postslists() {
   const { currentPageCards, toggleFavoritePosts } = usePostsContext();
   return (
     <main className="uk-main">
-      <NavigationPosts />
+      <Navigation />
       <div className="uk-section">
         <div className="uk-container">
           <Filters />

@@ -5,6 +5,7 @@ function FavoriteAlbums({ title, id, toggleFavoriteAlbums }) {
   return (
     <tbody>
       <tr>
+        <th>Album</th>
         <td>{title}</td>
         <td className="uk-text-right">
           <button

@@ -8,7 +8,7 @@ import { Post } from "./components/Post/Post";
 import { Postsgrid } from "./containers/Postsgrid/Postsgrid";
 import { Postslists } from "./containers/Postslists/PostsLists";
 import { PostsProvider } from "./PostsContext";
-import ScrollToTop from "./components/Hooks/ScrollToTop"
+import ScrollToTop from "./Hooks/ScrollToTop"
 
 export default function App() {
   return (
