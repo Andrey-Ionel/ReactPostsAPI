@@ -12,7 +12,8 @@ const PostsProvider = ({ children }) => {
   const [orderValue, setOrderValue] = useState("asc");
   const [isSearching, setIsSearching] = useState(false);
   const [errorFetch, setErrorFetch] = useState(null);
-  const [pageView, setPageView] = useState()
+  const [pageListView, setPageListView] = useState(true);
+  const [pageGridView, setPageGridView] = useState(false);
 
   const indexOfLastPost = currentPage * postsQuantityPage;
   const indexOfFirstPost = indexOfLastPost - postsQuantityPage;
@@ -64,13 +65,13 @@ const PostsProvider = ({ children }) => {
     const favoritePostToggle = posts?.map((post) => {
       if (post.id === id && post.favoritePost === undefined) {
         post.favoritePost = true;
-        patchFavoritePostsRequest(id, post.favoritePost)
+        patchFavoritePostsRequest(id, post.favoritePost);
       } else if (post.id === id && post.favoritePost === false) {
         post.favoritePost = true;
-        patchFavoritePostsRequest(id, post.favoritePost)
+        patchFavoritePostsRequest(id, post.favoritePost);
       } else if (post.id === id && post.favoritePost === true) {
         post.favoritePost = false;
-        patchFavoritePostsRequest(id, post.favoritePost)
+        patchFavoritePostsRequest(id, post.favoritePost);
       }
       return post;
     })
@@ -81,13 +82,13 @@ const PostsProvider = ({ children }) => {
     const favoriteAlbumsToggle = posts?.map((album) => {
       if (album.id === id && album.favoriteAlbum === undefined) {
         album.favoriteAlbum = true;
-        patchFavoriteAlbumsRequest(id, album.favoriteAlbum)
+        patchFavoriteAlbumsRequest(id, album.favoriteAlbum);
       } else if (album.id === id && album.favoriteAlbum === false) {
         album.favoriteAlbum = true;
-        patchFavoriteAlbumsRequest(id, album.favoriteAlbum)
+        patchFavoriteAlbumsRequest(id, album.favoriteAlbum);
       } else if (album.id === id && album.favoriteAlbum === true) {
         album.favoriteAlbum = false;
-        patchFavoriteAlbumsRequest(id, album.favoriteAlbum)
+        patchFavoriteAlbumsRequest(id, album.favoriteAlbum);
       }
       return album;
     })
@@ -111,7 +112,11 @@ const PostsProvider = ({ children }) => {
     isSearching,
     setIsSearching,
     orderValue,
-    setOrderValue
+    setOrderValue,
+    pageListView,
+    setPageListView,
+    pageGridView,
+    setPageGridView
   }
   if (errorFetch) {
     return <Result

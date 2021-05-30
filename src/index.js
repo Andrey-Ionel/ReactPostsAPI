@@ -1,4 +1,5 @@
 import { StrictMode } from "react";
+import { PostsProvider } from "./PostsContext";
 import 'antd/dist/antd.css';
 import ReactDOM from "react-dom";
 import Uikit from "uikit";
@@ -10,7 +11,9 @@ Uikit.use(Icons);
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <App />
+    <PostsProvider>
+      <App />
+    </PostsProvider>
   </StrictMode>,
   rootElement
 );

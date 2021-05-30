@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 import { usePostsContext } from "../../PostsContext";
-import { NavLink } from "react-router-dom";
 import { useDebounce } from "../../Hooks/UseDebounce";
 import React from "react";
 
 function Filters() {
   const { getSortPostsRequest, setQuantityPosts,
     getSearchPostsRequest, setIsSearching, isSearching,
-    postsQuantityPage, orderValue, setOrderValue } = usePostsContext();
+    postsQuantityPage, orderValue, setOrderValue, pageListView,
+    setPageListView, pageGridView, setPageGridView } = usePostsContext();
   const [name, setName] = useState("");
   const [, setSearchResults] = useState([]);
-
   const debouncedValue = useDebounce(name, 500);
 
   useEffect(() => {
@@ -35,7 +34,8 @@ function Filters() {
     setOrderValue(e.target.value);
   }
 
-  const isActive = location.pathname;
+  const activeList = pageListView ? "uk-active" : "";
+  const activeGrid = pageGridView ? "uk-active" : "";
 
   const onKeyPressDefault = (e) => {
     if (e.charCode === 13) {
@@ -74,16 +74,16 @@ function Filters() {
         <option value="24">24</option>
       </select>
       <div className="uk-button-group uk-margin-left">
-        <NavLink to="/"
-          activeClassName={isActive === "/" ? "uk-active" : ""}
-          className="uk-button uk-button-default" >
+        <button
+          className={`uk-button uk-button-default ${activeList}`}
+          onClick={() => { setPageGridView(false); setPageListView(true) }}>
           <span uk-icon="icon:  grid"></span>
-        </NavLink>
-        <NavLink to="/Postsgrid"
-          activeClassName={isActive === "/Postsgrid" ? "uk-active" : ""}
-          className="uk-button uk-button-default" >
+        </button>
+        <button
+          className={`uk-button uk-button-default ${activeGrid}`}
+          onClick={() => { setPageGridView(true); setPageListView(false) }}>
           <span uk-icon="icon:  list"></span>
-        </NavLink>
+        </button>
       </div>
     </div >
   )
