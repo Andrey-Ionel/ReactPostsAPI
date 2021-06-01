@@ -3,11 +3,11 @@ import { usePostsContext } from "../../PostsContext";
 import { useDebounce } from "../../Hooks/UseDebounce";
 import React from "react";
 
-function Filters() {
+function Filters({ pageListView,
+  setPageListView, pageGridView, setPageGridView }) {
   const { getSortPostsRequest, setQuantityPosts,
     getSearchPostsRequest, setIsSearching, isSearching,
-    postsQuantityPage, orderValue, setOrderValue, pageListView,
-    setPageListView, pageGridView, setPageGridView } = usePostsContext();
+    postsQuantityPage, orderValue, setOrderValue } = usePostsContext();
   const [name, setName] = useState("");
   const [, setSearchResults] = useState([]);
   const debouncedValue = useDebounce(name, 500);
