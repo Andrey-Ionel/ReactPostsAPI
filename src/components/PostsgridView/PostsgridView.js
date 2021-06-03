@@ -1,3 +1,4 @@
+import React from "react";
 import { usePostsContext } from "../../PostsContext";
 import PostscardPostsgrid from "../../components/PostscardPostsgrid/PostscardPostsgrid";
 import { Result } from 'antd';

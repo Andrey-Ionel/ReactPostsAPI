@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { Albums } from "./containers/Albums/Albums";
 import { Post } from "./components/Post/Post";

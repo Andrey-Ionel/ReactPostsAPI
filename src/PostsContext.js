@@ -1,4 +1,4 @@
-import { useState, createContext, useEffect, useContext } from "react";
+import React, { useState, createContext, useEffect, useContext } from "react";
 import { getPostsRequest, patchFavoritePostsRequest, patchFavoriteAlbumsRequest } from "./api";
 import fetcher from "./utils/fetcher";
 import { Result } from 'antd';

@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 import { PostsProvider } from "./PostsContext";
 import 'antd/dist/antd.css';
 import ReactDOM from "react-dom";
